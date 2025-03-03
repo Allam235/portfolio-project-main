@@ -8,6 +8,16 @@ the following form: YYYY.0M.0D.
 
 ## [Unreleased]
 
+## YYYY.MM.DD
+
+### Added
+
+- Designed a proof of concept for MedBase component and internal class Patient
+
+### Updated
+
+- Changed design to include ...
+
 ## [2024.12.30]
 
 - Added table-based rubrics to all 6 parts of the project
