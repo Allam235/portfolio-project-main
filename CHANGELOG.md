@@ -8,6 +8,11 @@ the following form: YYYY.0M.0D.
 
 ## [Unreleased]
 
+## [2024.04.12]
+
+- Added src files for both MedBase and MedBaseKernal
+- Added javadoc statements for methods inMedBase and MedBaseKernal
+
 ## [2024.12.30]
 
 - Added table-based rubrics to all 6 parts of the project
