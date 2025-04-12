@@ -10,6 +10,7 @@ the following form: YYYY.0M.0D.
 
 ## [2024.04.12]
 
+- Created seperate file for PatientKey enums
 - Added src files for both MedBase and MedBaseKernal
 - Added javadoc statements for methods inMedBase and MedBaseKernal
 

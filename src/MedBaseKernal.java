@@ -1,35 +1,9 @@
 import components.map.Map;
 import components.map.Map1L;
-import components.sequence.Sequence;
 
 public class MedBaseKernal extends Standard<MedBase> {
 
     public record Query(PatientKey key, String lookup) {
-    }
-
-    private enum PatientKey {
-
-        // Personal Information
-        FIRST_NAME, LAST_NAME, DATE_OF_BIRTH, GENDER, PATIENT_ID,
-
-        // Medical Information
-        NOTES,
-
-        // Contact Information
-        ADDRESS, PHONE_NUMBER, EMAIL,
-
-        // Emergency Contact
-        EMERGENCY_CONTACT_NAME, EMERGENCY_CONTACT_PHONE,
-
-        // Medical History
-        ALLERGIES, CURRENT_MEDICATIONS, MEDICAL_CONDITIONS, PREVIOUS_SURGERIES,
-
-        // Insurance Information
-        INSURANCE_PROVIDER, INSURANCE_POLICY_NUMBER,
-
-        // Doctor's Information
-        PRIMARY_CARE_PHYSICIAN, PHYSICIAN_CONTACT;
-
     }
 
     private Map<String, Map<PatientKey, String>> patientBase = new Map1L<>();
@@ -115,47 +89,6 @@ public class MedBaseKernal extends Standard<MedBase> {
      */
     public Map<PatientKey, String> updateInfo(String patientId,
             String strPatientInfo) {
-    }
-
-    /**
-     * Creates sequence of type {@code <Map<PatientKey, String>} which contains
-     * {@code <Map<PatientKey, String>} from {@code patientBase} that contain
-     * same key value pairs parsed from {@code searchBy}.
-     *
-     * @param searchBy
-     *            formatted string representing a
-     *            {@code <Map<PatientKey, String>}
-     * @return sequence of {@code <Map<PatientKey, String>} that match the
-     *         search criteria
-     * @updates patientBase
-     * @requires <pre>
-     * searchBy ≠ null and [searchBy is a valid formatted patient info string]
-     * </pre>
-     * @ensures <pre>
-     * [returns a sequence of {@code <Map<PatientKey, String>} where all key value
-     * pairs are the same as the key value pairs in searchBy]
-     * </pre>
-     */
-    public Sequence<Map<PatientKey, String>> search(String searchBy) {
-    }
-
-    /**
-     * Creates sequence of type {@code <Map<PatientKey, String>} which contains
-     * {@code <Map<PatientKey, String>} from {@code patientBase} that contain
-     * same key value pairs parsed from {@code searchBy}.
-     *
-     * @param searchBy
-     *            {@code <Map<PatientKey, String>} containing patient data
-     * @return sequence of {@code <Map<PatientKey, String>} that match the
-     *         search criteria
-     * @updates patientBase
-     * @requires searchBy ≠ null
-     * @ensures <pre>
-     * [returns a sequence of {@code <Map<PatientKey, String>} where all key value
-     * pairs are the same as the key value pairs in searchBy]
-     * </pre>
-     */
-    public Sequence<Map<PatientKey, String>> search(Query... searchBy) {
     }
 
     /**
