@@ -266,17 +266,53 @@ public class MedBase {
 
     }
 
-    /*
-     * Returns map containg patient data
-     *
-     * @param patientId the patient id
-     *
-     * @return Map<PatientKey, String>
-     *
-     * @ensures Map<PatientKey, String>.value(PatientKey.PATIENTID) == patientId
-     */
     public Map<PatientKey, String> patientRecord(String patientId) {
-        return this.patientBase.value(patientId);
+        if (this.patientBase.hasKey(patientId)) {
+            return this.patientBase.value(patientId);
+        }
+        return null;
+    }
+
+    public void removePatientRecord(String patientId) {
+        if (this.patientBase.hasKey(patientId)) {
+            this.patientBase.remove(patientId);
+        }
+    }
+
+    public Sequence<Map<PatientKey, String>> findDuplicates() {
+        Sequence<Map<PatientKey, String>> duplicates = new Sequence1L<>();
+        Map<String, String> seen = new Map1L<>();
+
+        Map<String, Map<PatientKey, String>> tempBase = this.patientBase
+                .newInstance();
+        Map<String, Map<PatientKey, String>> copyBase = this.patientBase
+                .newInstance();
+
+        tempBase.transferFrom(this.patientBase);
+
+        while (tempBase.size() > 0) {
+            Pair<String, Map<PatientKey, String>> p = tempBase.removeAny();
+            Map<PatientKey, String> patient = p.value();
+            String id = p.key();
+
+            //if patient has all necessary info
+            if (patient.hasKey(PatientKey.FIRST_NAME)
+                    && patient.hasKey(PatientKey.LAST_NAME)
+                    && patient.hasKey(PatientKey.DATE_OF_BIRTH)) {
+                String signature = patient.value(PatientKey.FIRST_NAME) + "|"
+                        + patient.value(PatientKey.LAST_NAME) + "|"
+                        + patient.value(PatientKey.DATE_OF_BIRTH);
+
+                if (seen.hasKey(signature)) {
+                    duplicates.add(0, patient);
+                } else {
+                    seen.add(signature, id);
+                }
+            }
+            copyBase.add(id, patient);
+        }
+        this.patientBase.transferFrom(copyBase);
+        return duplicates;
     }
 
     public static void main(String[] args) {
