@@ -1,7 +1,7 @@
 import components.map.Map;
 import components.sequence.Sequence;
 
-public class MedBase extends MedBaseKernal {
+public interface MedBase extends MedBaseKernel {
 
     /**
      * Creates sequence of type {@code <Map<PatientKey, String>} which contains
@@ -22,8 +22,7 @@ public class MedBase extends MedBaseKernal {
      * pairs are the same as the key value pairs in searchBy]
      * </pre>
      */
-    public Sequence<Map<PatientKey, String>> search(String searchBy) {
-    }
+    public Sequence<Map<PatientKey, String>> search(String searchBy);
 
     /**
      * Creates sequence of type {@code <Map<PatientKey, String>} which contains
@@ -41,7 +40,25 @@ public class MedBase extends MedBaseKernal {
      * pairs are the same as the key value pairs in searchBy]
      * </pre>
      */
-    public Sequence<Map<PatientKey, String>> search(Query... searchBy) {
-    }
+    public Sequence<Map<PatientKey, String>> search(Query... searchBy);
+
+    /**
+     * Finds and returns all patient Ids in the database that have matching
+     * first name, last name, and date of birth.
+     *
+     * @return a {@code Sequence} containing pairs of patient Ids who have
+     *         matching first name, last name, and date of birth
+     * @ensures <pre>
+    * For all indices i and j in the returned sequence such that
+    * i%2 == 0 and i == j+1:
+    *     patientBase.value(returned[i])[FIRST_NAME] =
+    *         patientBase.value(returned[j])[FIRST_NAME] and
+    *     patientBase.value(returned[i])[LAST_NAME] =
+    *         patientBase.value(returned[j])[LAST_NAME] and
+    *     patientBase.value(returned[i])[DATE_OF_BIRTH] =
+    *         patientBase.value(returned[j])[DATE_OF_BIRTH]
+    * </pre>
+     */
+    public Sequence<Map<PatientKey, String>> findDuplicates();
 
 }
